@@ -7,7 +7,7 @@ export const state = reactive({
     base_url: 'https://api.themoviedb.org/3/search/movie?api_key=b61b93aca5c1ec2439265741a384f01d&query=',
     movies: "",
 
-    searchFilm(input) {
+    searchFilms(input) {
         if (input == "")
             return
         else
