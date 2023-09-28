@@ -19,7 +19,6 @@ export default {
     }
   },
   created() {
-    //state.searchFilms(this.takeInput(this.searchedFilm));
   }
 }
 
@@ -32,14 +31,18 @@ export default {
       <input type="text" v-model="searchedFilm" placeholder="Cerca un film">
       <button class="btn btn-primary" @click="state.searchFilms(searchedFilm), clearInput()">Cerca</button>
     </div>
-    <!--SearchedElements-->
-    <div>
-      <h3>Titolo</h3>
-      <h5>Titolo Originale</h5>
-      <span>Lingua</span>
-      <span>Voto</span>
-    </div>
+  </div>
+  <!--SearchedElements-->
+  <div class=" container d-flex flex-wrap mx-auto">
+    <div class="col-3 my-5" v-for="result in state.results">
+      <h3>{{ result.title }}</h3>
+      <h5>{{ result.original_title }}</h5>
+      <div class="d-flex gap-5">
+        <span>{{ result.original_language }}</span>
+        <span>{{ result.vote_average }}</span>
+      </div>
 
+    </div>
   </div>
 </template>
 
