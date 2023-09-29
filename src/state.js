@@ -10,12 +10,14 @@ export const state = reactive({
     searchFilms(input) {
         if (input == "")
             return
-        else
+        else {
             axios(`${this.base_url}${input}`)
                 .then(response => {
                     console.log(response.data);
+
                     this.results = response.data.results;
                     console.log(this.results);
                 })
+        }
     }
 })

@@ -38,12 +38,12 @@ export default {
       <h3>{{ result.title }}</h3>
       <h5>{{ result.original_title }}</h5>
       <div class="d-flex gap-5">
-        <span>{{ result.original_language }}</span>
+        <img
+          :src="`https://flagsapi.com/${result.original_language.toUpperCase() == 'EN' ? 'GB' : (result.original_language.toUpperCase() == 'JA' ? 'JP' : (result.original_language.toUpperCase() == 'ZH' ? 'CN' : ''))}/flat/64.png`">
         <span>{{ result.vote_average }}</span>
       </div>
 
     </div>
   </div>
 </template>
-
 <style ></style>
