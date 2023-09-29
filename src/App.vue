@@ -33,12 +33,12 @@ export default {
     </div>
   </div>
   <!--SearchedElements-->
-  <div class=" container mx-auto ">
+  <div class=" container mx-auto mb-5">
     <div class="row">
-      <ul class="my-5 d-flex flex-wrap gap-3">
+      <ul class=" d-flex flex-wrap gap-3">
         <li v-for="result in state.resultsMovie"
           :style="{ backgroundImage: `url('https://image.tmdb.org/t/p/w342/${result.poster_path}')` }"
-          style="background-size: cover;" class=" col-2">
+          style="background-size: cover;" class=" col-2 searchedElement">
           <h3>{{ result.title }}</h3>
           <h5>{{ result.original_title }}</h5>
           <div class="d-flex gap-5">
@@ -50,10 +50,10 @@ export default {
       </ul>
     </div>
     <div class="row">
-      <ul class="my-5 d-flex flex-wrap gap-3">
+      <ul class="d-flex flex-wrap gap-3">
         <li v-for="result in state.resultsTV"
           :style="{ backgroundImage: `url('https://image.tmdb.org/t/p/w342/${result.poster_path}')` }"
-          style="background-size: cover;" class=" col-2">
+          style="background-size: cover;" class=" col-2 searchedElement">
           <h3>{{ result.name }}</h3>
           <h5>{{ result.original_name }}</h5>
           <div class="d-flex gap-5" style="background: ;">
@@ -70,5 +70,10 @@ export default {
 <style >
 ul {
   list-style: none;
+}
+
+.searchedElement {
+  height: 350px;
+
 }
 </style>
