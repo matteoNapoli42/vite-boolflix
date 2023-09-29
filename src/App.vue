@@ -33,25 +33,42 @@ export default {
     </div>
   </div>
   <!--SearchedElements-->
-  <div class=" container d-flex flex-wrap mx-auto">
-    <div class="col-3 my-5" v-for="result in state.resultsMovie">
-      <h3>{{ result.title }}</h3>
-      <h5>{{ result.original_title }}</h5>
-      <div class="d-flex gap-5">
-        <img
-          :src="`https://flagsapi.com/${result.original_language.toUpperCase() == 'EN' ? 'GB' : (result.original_language.toUpperCase() == 'JA' ? 'JP' : (result.original_language.toUpperCase() == 'ZH' ? 'CN' : ''))}/flat/64.png`">
-        <span>{{ result.vote_average }}</span>
-      </div>
+  <div class=" container mx-auto ">
+    <div class="row">
+      <ul class="my-5 d-flex flex-wrap gap-3">
+        <li v-for="result in state.resultsMovie"
+          :style="{ backgroundImage: `url('https://image.tmdb.org/t/p/w342/${result.poster_path}')` }"
+          style="background-size: cover;" class=" col-2">
+          <h3>{{ result.title }}</h3>
+          <h5>{{ result.original_title }}</h5>
+          <div class="d-flex gap-5">
+            <img
+              :src="`https://flagsapi.com/${result.original_language.toUpperCase() == 'EN' ? 'GB' : (result.original_language.toUpperCase() == 'JA' ? 'JP' : (result.original_language.toUpperCase() == 'ZH' ? 'CN' : ''))}/flat/64.png`">
+            <span>{{ result.vote_average }}</span>
+          </div>
+        </li>
+      </ul>
     </div>
-    <div class="col-3 my-5" v-for="result in state.resultsTV">
-      <h3>{{ result.name }}</h3>
-      <h5>{{ result.original_name }}</h5>
-      <div class="d-flex gap-5">
-        <img
-          :src="`https://flagsapi.com/${result.original_language.toUpperCase() == 'EN' ? 'GB' : (result.original_language.toUpperCase() == 'JA' ? 'JP' : (result.original_language.toUpperCase() == 'ZH' ? 'CN' : ''))}/flat/64.png`">
-        <span>{{ result.vote_average }}</span>
-      </div>
+    <div class="row">
+      <ul class="my-5 d-flex flex-wrap gap-3">
+        <li v-for="result in state.resultsTV"
+          :style="{ backgroundImage: `url('https://image.tmdb.org/t/p/w342/${result.poster_path}')` }"
+          style="background-size: cover;" class=" col-2">
+          <h3>{{ result.name }}</h3>
+          <h5>{{ result.original_name }}</h5>
+          <div class="d-flex gap-5" style="background: ;">
+            <img
+              :src="`https://flagsapi.com/${result.original_language.toUpperCase() == 'EN' ? 'GB' : (result.original_language.toUpperCase() == 'JA' ? 'JP' : (result.original_language.toUpperCase() == 'ZH' ? 'CN' : ''))}/flat/64.png`">
+            <span>{{ result.vote_average }}</span>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
-<style ></style>
+
+<style >
+ul {
+  list-style: none;
+}
+</style>
