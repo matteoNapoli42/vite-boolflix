@@ -1,79 +1,59 @@
 <script>
 import { state } from './state'
+import FilmRow from "./components/FilmRow.vue"
+import TvRow from "./components/TvRow.vue"
+import Header from './components/Header.vue'
 export default {
   name: "App",
   components: {
+    FilmRow,
+    TvRow,
+    Header
 
   },
 
   data() {
     return {
       state,
-      searchedFilm: "",
     }
   },
-
-  methods: {
-    clearInput() {
-      this.searchedFilm = "";
-    }
-  },
-  created() {
-  }
 }
+
 
 </script>
 
 <template>
-  <div class="container">
-    <!--SearchZone-->
-    <div class="d-flex justify-content-center gap-3 mx-auto py-4">
-      <input type="text" v-model="searchedFilm" placeholder="Cerca un film">
-      <button class="btn btn-primary" @click="state.searchFilms(searchedFilm), clearInput()">Cerca</button>
-    </div>
-  </div>
+  <!--SearchZone-->
+  <Header />
+
+
   <!--SearchedElements-->
   <div class=" container mx-auto mb-5">
-    <div class="row">
+    <!--Film Row-->
+    <div class=" pt-4">
       <ul class=" d-flex flex-wrap gap-3">
-        <li v-for="result in state.resultsMovie"
-          :style="{ backgroundImage: `url('https://image.tmdb.org/t/p/w342/${result.poster_path}')` }"
-          style="background-size: cover;" class=" col-2 searchedElement">
-          <h3>{{ result.title }}</h3>
-          <h5>{{ result.original_title }}</h5>
-          <div class="d-flex gap-5">
-            <img
-              :src="`https://flagsapi.com/${result.original_language.toUpperCase() == 'EN' ? 'GB' : (result.original_language.toUpperCase() == 'JA' ? 'JP' : (result.original_language.toUpperCase() == 'ZH' ? 'CN' : ''))}/flat/64.png`">
-            <span>{{ result.vote_average }}</span>
-          </div>
-        </li>
+        <FilmRow v-for="film in  state.resultsMovie " :elem="film" />
       </ul>
     </div>
-    <div class="row">
+    <!--TvSeries Row-->
+    <div class=" pt-4">
       <ul class="d-flex flex-wrap gap-3">
-        <li v-for="result in state.resultsTV"
-          :style="{ backgroundImage: `url('https://image.tmdb.org/t/p/w342/${result.poster_path}')` }"
-          style="background-size: cover;" class=" col-2 searchedElement">
-          <h3>{{ result.name }}</h3>
-          <h5>{{ result.original_name }}</h5>
-          <div class="d-flex gap-5" style="background: ;">
-            <img
-              :src="`https://flagsapi.com/${result.original_language.toUpperCase() == 'EN' ? 'GB' : (result.original_language.toUpperCase() == 'JA' ? 'JP' : (result.original_language.toUpperCase() == 'ZH' ? 'CN' : ''))}/flat/64.png`">
-            <span>{{ result.vote_average }}</span>
-          </div>
-        </li>
+        <TvRow v-for="series in state.resultsTV" :elem="series" />
       </ul>
     </div>
   </div>
 </template>
 
-<style >
+<style>
 ul {
   list-style: none;
 }
 
-.searchedElement {
+.searchedItem {
   height: 350px;
+}
 
+#header {
+  height: 75px;
 }
 </style>
