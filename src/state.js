@@ -9,19 +9,21 @@ export const state = reactive({
 
     resultsMovie: "",
     resultsTV: "",
-    pageCounter: 0,
+    pageCounter: 1,
     pagesMovieNumber: 0,
     pagesTvNumber: 0,
     maxPages: 0,
+    lastSearched: "",
 
     searchFilms(input) {
         if (input == "")
             return
         else {
+            this.lastSearched = input;
             axios(`${this.film_url}${input}`)
                 .then(response => {
                     console.log(response.data);
-                    this.pagesMovieNumber = response.data.total_pages;
+                    this.pagesMovieNumber = parseInt(response.data.total_pages);
                     console.log(this.pagesMovieNumber);
                     this.resultsMovie = response.data.results;
                     console.log(this.resultsMovie, "FILM");
@@ -29,36 +31,31 @@ export const state = reactive({
             axios(`${this.tv_url}${input}`)
                 .then(response => {
                     console.log(response.data);
-                    this.pagesTvNumber = response.data.total_pages;
+                    this.pagesTvNumber = parseInt(response.data.total_pages);
                     console.log(this.pagesTvNumber);
                     this.resultsTV = response.data.results;
                     console.log(this.resultsTV, "SERIE TVS");
                 })
-            this.maxPages = this.max(this.pagesMovieNumber, this.pagesTvNumber)
-            console.log(this.maxPages, "NUMERO DI PAGINE");
-
         }
+        this.maxPages = this.max(this.pagesMovieNumber, this.pagesTvNumber)
+        console.log(this.maxPages, "NUMERO DI PAGINE");
     },
 
     changePage(param) {
-        if (this.pageCounter + param < this.maxPages && this.pageCounter + param > 1) {
-            this.pageCounter += param;
-            if (this.pagesMovieNumber < this.pageCounter)
-                axios(`${this.film_url}${input}&page=${this.pageCounter}`)
-                    .then(response => {
-                        console.log(response);
-                        this.resultsMovie = response.data.results;
-                        console.log(this.resultsMovie, "FILM");
-                    })
-            if (this.pagesTvNumber < this.pageCounter)
-                axios(`${this.tv_url}${input}&page=${this.pageCounter}`)
-                    .then(response => {
-                        console.log(response.data);
-                        this.resultsTV = response.data.results;
-                        console.log(this.resultsTV, "SERIE TVS");
-                    })
+        this.pageCounter += param;
+        axios(`${this.film_url}${this.lastSearched}&page=${this.pageCounter}`)
+            .then(response => {
+                console.log(response.data);
+                this.resultsMovie = response.data.results;
+                console.log(this.resultsMovie, "FILM", "CHANGE PAGE");
+            })
 
-        }
+        axios(`${this.tv_url}${this.lastSearched}&page=${this.pageCounter}`)
+            .then(response => {
+                console.log(response.data);
+                this.resultsTV = response.data.results;
+                console.log(this.resultsTV, "SERIE TVS", "CHANGE PAGE");
+            })
     },
 
     max(num1, num2) {

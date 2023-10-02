@@ -53,7 +53,7 @@ export default {
     <!--Navigation-->
     <div class="d-flex">
       <button @click="state.changePage(-1)">Pagina Indietro</button>
-      <span>{{ state.pageCounter }}/{{ state.maxPages }}</span>
+      <span>{{ state.pageCounter - 1 }}/{{ state.maxPages }}</span>
       <button @click="state.changePage(1)">Pagina Avanti</button>
 
 
