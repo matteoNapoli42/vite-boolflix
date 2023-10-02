@@ -7,7 +7,8 @@ export default {
 
     data() {
         return {
-            defaultImg: "../assets/img/img_not_aviable.jpg"
+            defaultImg: "../assets/img/img_not_aviable.jpg",
+            flag: "",
         }
     },
     methods: {
@@ -16,12 +17,25 @@ export default {
             this.fullStar = Math.ceil(this.fullStar);
             this.emptyStar = 5 - this.fullStar;
             console.log(this.fullStar, "/", this.emptyStar);
+        },
+        getFlag() {
+            this.flag = this.elem.original_language.toUpperCase();
+            console.log(this.flag);
+
+            if (this.flag == "ZH")
+                this.flag = "CN";
+            else if (this.flag == "EN")
+                this.flag = "GB";
+            else if (this.flag == "JA")
+                this.flag = "JP"
+            console.log(this.flag);
         }
     },
 
 
     created() {
-        this.starRating()
+        this.starRating();
+        this.getFlag();
     },
 }
 
@@ -44,8 +58,7 @@ export default {
             </span>
             <br>
 
-            <img
-                :src="`https://flagsapi.com/${elem.original_language.toUpperCase() == 'EN' ? 'GB' : (elem.original_language.toUpperCase() == 'JA' ? 'JP' : (elem.original_language.toUpperCase() == 'ZH' ? 'CN' : ''))}/flat/32.png`">
+            <img :src="`https://flagsapi.com/${this.flag}/flat/32.png`">
             <br>
             <span class="d-flex align-items-center">
                 Voto:
