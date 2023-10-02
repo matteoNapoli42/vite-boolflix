@@ -29,15 +29,28 @@ export default {
 <template>
     <li :style="{ backgroundImage: `url('https://image.tmdb.org/t/p/w342/${elem.poster_path}')` }"
         style="background-size: cover;" class="col-2 searchedItem">
-        <h3>{{ elem.name }}</h3>
-        <h5>{{ elem.original_name }}</h5>
-        <div class="d-flex gap-5" style="background: ;">
+        <div class="container itemInfo text-white ">
+            <span>
+                Titolo : {{ elem.name }}
+            </span>
+            <br>
+            <span>
+                Titolo Originale : {{ elem.original_name }}
+            </span>
+            <br>
+
             <img
-                :src="`https://flagsapi.com/${elem.original_language.toUpperCase() == 'EN' ? 'GB' : (elem.original_language.toUpperCase() == 'JA' ? 'JP' : (elem.original_language.toUpperCase() == 'ZH' ? 'CN' : ''))}/flat/64.png`">
-            <span class="d-flex">
+                :src="`https://flagsapi.com/${elem.original_language.toUpperCase() == 'EN' ? 'GB' : (elem.original_language.toUpperCase() == 'JA' ? 'JP' : (elem.original_language.toUpperCase() == 'ZH' ? 'CN' : ''))}/flat/32.png`">
+            <br>
+            <span class="d-flex align-items-center">
+                Voto:
                 <i v-for="n in fullStar" class="fa-solid fa-star" style="color: #f8fb60;"></i>
                 <i v-for="m in emptyStar" class="fa-solid fa-star" style="color: #8f8f8f;"></i>
             </span>
+            <span class="overview">
+                Overview : {{ elem.overview }}
+            </span>
+
         </div>
     </li>
 </template>
@@ -50,6 +63,22 @@ ul {
 
 .searchedElement {
     height: 350px;
+}
 
+.itemInfo {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.overview {
+    word-spacing: -1px;
+    font-size: x-small;
+    overflow-y: scroll;
+}
+
+li:hover .itemInfo {
+    display: block;
+    background-color: rgba(5, 5, 5, 1);
 }
 </style>
