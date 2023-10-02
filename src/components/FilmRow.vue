@@ -9,7 +9,8 @@ export default {
         return {
             fullStar: null,
             emptyStar: null,
-            flag: ""
+            flag: "",
+            defaultImg: "../assets/img/img_not_aviable.jpg"
         }
     },
 

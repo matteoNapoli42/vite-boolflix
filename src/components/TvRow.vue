@@ -5,6 +5,11 @@ export default {
         elem: Object,
     },
 
+    data() {
+        return {
+            defaultImg: "../assets/img/img_not_aviable.jpg"
+        }
+    },
     methods: {
         starRating() {
             this.fullStar = this.elem.vote_average / 2;
@@ -27,7 +32,7 @@ export default {
 
 
 <template>
-    <li :style="{ backgroundImage: `url('https://image.tmdb.org/t/p/w342/${elem.poster_path}')` }"
+    <li :style="{ backgroundImage: `${elem.poster_path} != null ? 'url('https://image.tmdb.org/t/p/w342/${elem.poster_path}')' : '${this.defaultImg}'` }"
         style="background-size: cover;" class="col-2 searchedItem">
         <div class="container itemInfo text-white ">
             <span>

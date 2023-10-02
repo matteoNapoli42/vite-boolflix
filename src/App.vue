@@ -17,6 +17,15 @@ export default {
       state,
     }
   },
+
+  methods: {
+    starRating() {
+      this.fullStar = this.elem.vote_average / 2;
+      this.fullStar = Math.ceil(this.fullStar);
+      this.emptyStar = 5 - this.fullStar;
+      console.log(this.fullStar, "/", this.emptyStar);
+    }
+  },
 }
 
 
