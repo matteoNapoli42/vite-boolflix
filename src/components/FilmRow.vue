@@ -34,12 +34,19 @@ export default {
             else if (this.flag == "JA")
                 this.flag = "JP"
             console.log(this.flag);
+        },
+        setBackground() {
+            if (this.elem.poster_path == null)
+                this.backgroundIMG = "url('/src/assets/img/img_not_aviable.jpg')";
+            else
+                this.backgroundIMG = `url('https://image.tmdb.org/t/p/w342/${this.elem.poster_path}')`;
         }
     },
 
     created() {
         this.starRating();
         this.getFlag();
+        this.setBackground();
     },
 }
 
@@ -51,8 +58,8 @@ export default {
 
 
 <template>
-    <li :style="{ backgroundImage: `url('https://image.tmdb.org/t/p/w342/${elem.poster_path}')` }"
-        style="background-size: cover;" class=" col-2 searchedItem">
+    <li :style="{ backgroundImage: `${this.backgroundIMG}` }" style="background-size: cover; background-position: center;"
+        class=" col-2 searchedItem">
         <div class="container itemInfo text-white ">
             <span>
                 Titolo : {{ elem.title }}

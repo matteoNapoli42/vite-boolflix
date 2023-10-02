@@ -16,7 +16,7 @@ export const state = reactive({
         else {
             axios(`${this.film_url}${input}`)
                 .then(response => {
-                    console.log(response.data);
+                    console.log(response);
                     this.resultsMovie = response.data.results;
                     console.log(this.resultsMovie, "FILM");
                 })

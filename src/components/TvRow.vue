@@ -7,7 +7,8 @@ export default {
 
     data() {
         return {
-            defaultImg: "../assets/img/img_not_aviable.jpg",
+            defaultImg: "url('/src/assets/img/img_not_aviable.jpg')",
+            backgroundIMG: "",
             flag: "",
         }
     },
@@ -29,6 +30,12 @@ export default {
             else if (this.flag == "JA")
                 this.flag = "JP"
             console.log(this.flag);
+        },
+        setBackground() {
+            if (this.elem.poster_path == null)
+                this.backgroundIMG = "url('/src/assets/img/img_not_aviable.jpg')";
+            else
+                this.backgroundIMG = `url('https://image.tmdb.org/t/p/w342/${this.elem.poster_path}')`;
         }
     },
 
@@ -36,6 +43,7 @@ export default {
     created() {
         this.starRating();
         this.getFlag();
+        this.setBackground();
     },
 }
 
@@ -46,8 +54,8 @@ export default {
 
 
 <template>
-    <li :style="{ backgroundImage: `${elem.poster_path} != null ? 'url('https://image.tmdb.org/t/p/w342/${elem.poster_path}')' : '${this.defaultImg}'` }"
-        style="background-size: cover;" class="col-2 searchedItem">
+    <li :style="{ backgroundImage: `${this.backgroundIMG}` }" style="background-size: cover; background-position: center;"
+        class="col-2 searchedItem">
         <div class="container itemInfo text-white ">
             <span>
                 Titolo : {{ elem.name }}
@@ -62,8 +70,8 @@ export default {
             <br>
             <span class="d-flex align-items-center">
                 Voto:
-                <i v-for="n in fullStar" class="fa-solid fa-star" style="color: #f8fb60;"></i>
-                <i v-for="m in emptyStar" class="fa-solid fa-star" style="color: #8f8f8f;"></i>
+                <i v-for="  n   in   fullStar  " class="fa-solid fa-star" style="color: #f8fb60;"></i>
+                <i v-for="  m   in   emptyStar  " class="fa-solid fa-star" style="color: #8f8f8f;"></i>
             </span>
             <span class="overview">
                 Overview : {{ elem.overview }}
