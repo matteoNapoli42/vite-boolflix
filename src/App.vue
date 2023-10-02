@@ -50,6 +50,14 @@ export default {
         <TvRow v-for="series in state.resultsTV" :elem="series" />
       </ul>
     </div>
+    <!--Navigation-->
+    <div class="d-flex">
+      <button @click="state.changePage(-1)">Pagina Indietro</button>
+      <span>{{ state.pageCounter }}/{{ state.maxPages }}</span>
+      <button @click="state.changePage(1)">Pagina Avanti</button>
+
+
+    </div>
   </div>
 </template>
 
